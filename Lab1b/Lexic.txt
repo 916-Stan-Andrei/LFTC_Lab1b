@@ -1,0 +1,29 @@
+Alphabet:
+a-z
+A-Z
+_
+0-9
+
+
+Lexic:
+operators: + - * / // = < <= == >= > && || %
+separators: {} () ; : space newline "" '' ,
+reserved words: if else while write readInt readStr readBool readFloat var int string bool float array
+
+identifier = letter | letter{letter|digit|"_"}. (*An identifier can be a letter or a combination of letter digits or underscore, but starting with a letter*)
+letter = "A" | "B" |...| "Z" | "a" | "b" |...| "z".
+digit = "0" | "1" |...| "9".
+
+int_constant = ["+"|"-"]non_zero_digit{digit} | "0". (*An int constant can't start with 0, 0 does not need sign*).
+non_zero_digit = "1"|"2"|..|"9".
+string_constant = """{letter|digit|"_"|" "}""".
+bool_constant = "true"|"false".
+float_constant = int_constant["." digit{digit}].
+
+int_array_constant = "["[{int_constant","}int_constant]"]".
+string_array_constant = "["[{string_constant","}string_constant]"]".
+bool_array_constant = "["[{bool_constant","}bool_constant]"]".
+float_array_constant = "["[{float_constant","}float_constant]"]".
+
+
+

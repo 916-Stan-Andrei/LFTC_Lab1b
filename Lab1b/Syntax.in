@@ -1,0 +1,80 @@
+Syntax:
+
+program = statement{statement}.
+
+operator = "+" | "-" | "*" | "/" |  "//" | "%" | "==" | "<" | "<=" | ">" | ">=" | "=" | "&&" | "||".
+
+letter = "A" | "B" | "C" | ... | "Z" | "a" | ... "z".
+
+nonZeroDigit = "1" | "2" | ... | "9".
+
+digit = "0" | "1" | "2" | ... | "9".
+
+statement = declStatement
+                | assignment
+                | input
+                | output
+                | conditional
+                | loop
+                | comment.
+
+declStatement = "var" identifier "space" type ["=" expression] ";".
+
+type = "int"
+        | "bool"
+        | "float"
+        | "string"
+        | "array"[type",nonZeroDigit{digit}].
+
+assignment = identifier"="expression";".
+
+input = ("readInt""("identifier")"
+    |"readString""("identifier")"
+    |"readBool""("identifier")"
+    |"readFloat""("identifier")")";".
+
+Output = "write""("expression{, expression}")"";".
+
+conditional = "if" "(" condition ")" "{" program "}" [ "else" "{" program "}" ].
+
+condition = expression relation expression.
+
+relation = "<" | "<=" | "=" | "<>" | ">=" | ">".
+
+loop = "while" "(" condition ")" "{" program "}".
+
+comment = "//" { Any Character Except Newline }.
+
+expression = term { operator term }.
+
+term = identifier
+        | intConstant
+        | stringConstant
+        | boolConstant
+        | floatConstant
+        | arrayConstant 
+        | "("Expression")".
+
+identifier = letter | letter{letter|digit|"_"}.
+
+intConstant = ["+"|"-"]non_zero_digit{digit} | "0".
+
+stringConstant = """{letter|digit|"_"|" "}""".
+
+boolConstant = "true"|"false".
+
+floatConstant = intConstant["." digit{digit}].
+
+intArrayConstant = "["[{intConstant","}intConstant]"]".
+
+stringArrayConstant = "["[{stringConstant","}stringConstant]"]".
+
+boolArrayConstant = "["[{boolConstant","}boolConstant]"]".
+
+floatArrayConstant = "["[{floatConstant","}floatConstant]"]".
+
+arrayConstant = intArrayConstant
+                | stringArrayConstant
+                | boolArrayConstant
+                | floatArrayConstant.
+
